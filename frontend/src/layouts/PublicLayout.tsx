@@ -3,9 +3,5 @@ type PublicLayoutProps = {
 };
 
 export function PublicLayout({ children }: PublicLayoutProps) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
-      {children}
-    </div>
-  );
+  return <div className="min-h-screen">{children}</div>;
 }

@@ -9,8 +9,11 @@ import { Dashboard } from "./pages/Dashboard";
 import { AdminUsers } from "./pages/AdminUsers";
 import { Profile } from "./pages/Profile";
 import { ProfileSecurity } from "./pages/ProfileSecurity";
+import { CheckEmail } from "./pages/CheckEmail";
 import { PrivateRoute } from "../src/routes/PrivateRoute";
 import { PrivateLayout } from "./layouts/PrivateLayout";
+import PublicHome from "./pages/public/Home";
+import PublicNews from "./pages/public/News";
 
 type AppRoute = {
   path: string;
@@ -22,11 +25,23 @@ type AppRoute = {
 const routes: AppRoute[] = [
   {
     path: "/",
+    element: <PublicHome />,
+  },
+  {
+    path: "/noticias",
+    element: <PublicNews />,
+  },
+  {
+    path: "/login",
     element: <Login />,
   },
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/check-email",
+    element: <CheckEmail />,
   },
   {
     path: "/",
@@ -62,9 +77,9 @@ const routes: AppRoute[] = [
   },
 ];
 
-function renderRoute(route: AppRoute) {
+function renderRoute(route: AppRoute, index: number) {
   return (
-    <Route key={route.path} path={route.path} element={route.element}>
+    <Route key={`${route.path}-${index}`} path={route.path} element={route.element}>
       {route.children?.map(renderRoute)}
     </Route>
   );

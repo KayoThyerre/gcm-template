@@ -1,10 +1,11 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { AuthCard } from "../components/auth/AuthCard";
 import { useTheme } from "../hooks/useTheme";
+import { PublicLayout } from "../layouts/PublicLayout";
 import { api } from "../services/api";
 
 export function Register() {
@@ -74,85 +75,85 @@ export function Register() {
   }
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center md:justify-end md:pr-24 lg:pr-32 bg-cover bg-center bg-no-repeat bg-[url('/register-hero.png')] dark:bg-[url('/register-hero-dark.png')] relative"
-    >
-      <button
-        type="button"
-        onClick={toggleTheme}
-        className="absolute top-4 right-4 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur shadow transition hover:scale-105"
-      >
-        {isDark ? "☀️" : "🌙"}
-      </button>
-      <div
-        className={`transition-all duration-500 ease-out ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-      >
-        <AuthCard>
-          <h1 className="text-2xl font-semibold text-slate-900">Criar conta</h1>
+    <PublicLayout>
+      <div className="min-h-screen flex items-center justify-center md:justify-end md:pr-24 lg:pr-32 bg-cover bg-center bg-no-repeat bg-[url('/register-hero.png')] dark:bg-[url('/register-hero-dark.png')] relative">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="absolute top-4 right-4 p-2 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur shadow transition hover:scale-105"
+        >
+          {isDark ? "☀️" : "🌙"}
+        </button>
+        <div
+          className={`transition-all duration-500 ease-out ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
+          <AuthCard>
+            <h1 className="text-2xl font-semibold text-slate-900">Criar conta</h1>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            {errorMessage && (
-              <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-3 py-2 mb-3">
-                {errorMessage}
-              </div>
-            )}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {errorMessage && (
+                <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-3 py-2 mb-3">
+                  {errorMessage}
+                </div>
+              )}
 
-            <Input
-              type="text"
-              placeholder="Nome"
-              value={name}
-              onChange={(e) => {
-                if (errorMessage) setErrorMessage(null);
-                setName(e.target.value);
-              }}
-            />
+              <Input
+                type="text"
+                placeholder="Nome"
+                value={name}
+                onChange={(e) => {
+                  if (errorMessage) setErrorMessage(null);
+                  setName(e.target.value);
+                }}
+              />
 
-            <Input
-              type="email"
-              placeholder="E-mail"
-              value={email}
-              onChange={(e) => {
-                if (errorMessage) setErrorMessage(null);
-                setEmail(e.target.value);
-              }}
-            />
+              <Input
+                type="email"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => {
+                  if (errorMessage) setErrorMessage(null);
+                  setEmail(e.target.value);
+                }}
+              />
 
-            <Input
-              type="password"
-              placeholder="Senha"
-              value={password}
-              onChange={(e) => {
-                if (errorMessage) setErrorMessage(null);
-                setPassword(e.target.value);
-              }}
-            />
+              <Input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => {
+                  if (errorMessage) setErrorMessage(null);
+                  setPassword(e.target.value);
+                }}
+              />
 
-            <Input
-              type="password"
-              placeholder="Confirmar senha"
-              value={confirmPassword}
-              onChange={(e) => {
-                if (errorMessage) setErrorMessage(null);
-                setConfirmPassword(e.target.value);
-              }}
-            />
+              <Input
+                type="password"
+                placeholder="Confirmar senha"
+                value={confirmPassword}
+                onChange={(e) => {
+                  if (errorMessage) setErrorMessage(null);
+                  setConfirmPassword(e.target.value);
+                }}
+              />
 
-            <Button type="submit" disabled={loading}>
-              {loading ? "Cadastrando..." : "Cadastrar"}
-            </Button>
+              <Button type="submit" disabled={loading}>
+                {loading ? "Cadastrando..." : "Cadastrar"}
+              </Button>
 
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              className="text-sm text-blue-600 hover:text-blue-700 transition"
-            >
-              Ja possui conta? Entrar
-            </button>
-          </form>
-        </AuthCard>
+              <button
+                type="button"
+                onClick={() => navigate("/login")}
+                className="text-sm text-blue-600 hover:text-blue-700 transition"
+              >
+                Ja possui conta? Entrar
+              </button>
+            </form>
+          </AuthCard>
+        </div>
       </div>
-    </div>
+    </PublicLayout>
   );
 }
