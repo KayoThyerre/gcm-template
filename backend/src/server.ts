@@ -10,13 +10,12 @@ import { uploadRoutes } from "./routes/upload.routes";
 
 const app = express();
 const uploadsPath = path.resolve(process.cwd(), "uploads");
-const corsOrigin =
-  process.env.CORS_ORIGIN ??
-  (process.env.NODE_ENV === "development" ? "http://localhost:5173" : undefined);
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
+const PORT = Number(process.env.PORT) || 3333;
 
 app.use(
   cors({
-    origin: corsOrigin || false,
+    origin: corsOrigin,
   })
 );
 app.use(express.json());
@@ -34,8 +33,6 @@ app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 app.use("/upload", uploadRoutes);
 app.use(errorHandler);
-
-const PORT = 3333;
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
